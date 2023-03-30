@@ -41,23 +41,13 @@ public class TreatmentRecord {
 
     // ==== 생성 메서드 ==== //
     public void addRecordTreatmentArea(RecordTreatmentArea recordTreatmentArea){
-//        recordTreatmentAreas.add(recordTreatmentArea);
-//        recordTreatmentArea.setTreatmentRecord(this);
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> : " + recordTreatmentArea);
         if (recordTreatmentArea != null) {
             this.recordTreatmentAreas.add(recordTreatmentArea);
             recordTreatmentArea.setTreatmentRecord(this);
         }
     }
 
-//    public void addTreatmentArea(TreatmentArea treatmentArea){
-//        treatmentAreas.add(treatmentArea);
-//        treatmentArea.setTreatmentRecord(this);
-//    }
-
     public static TreatmentRecord createTreatmentRecord(Doctor doctor, Animal animal, AnimalType animalType, String recordContent, RecordTreatmentArea... recordTreatmentAreas){
-    //public static TreatmentRecord createTreatmentRecord(Doctor doctor, Animal animal, AnimalType animalType, String recordContent, TreatmentArea... treatmentAreas){
         TreatmentRecord treatmentRecord = new TreatmentRecord();
         treatmentRecord.setDoctor(doctor);
 
@@ -70,10 +60,6 @@ public class TreatmentRecord {
         for(RecordTreatmentArea recordTreatmentArea : recordTreatmentAreas){
             treatmentRecord.addRecordTreatmentArea(recordTreatmentArea);
         }
-
-//        for(TreatmentArea treatmentArea : treatmentAreas){
-//            treatmentRecord.addTreatmentArea(treatmentArea);
-//        }
 
         return treatmentRecord;
     }

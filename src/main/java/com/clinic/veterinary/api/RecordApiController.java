@@ -37,11 +37,9 @@ public class RecordApiController {
      */
     @PostMapping("/api/v1/record")
     public CreateRecordResponse saveRecordV1(@RequestBody @Valid CreateRecordRequest request){
-
         Long id = treatmentRecordService.treatmentRecord(request.getDoctorId(), request.getAnimalId(),
-                request.getAnimalTypeId(), request.getRecordContent());
+                request.getAnimalTypeId(), request.getRecordContent(), request.getTreatmentAreaIds());
 
-        treatmentRecordService.createRecordTreatmentArea(id, request.getTreatmentAreaId());
         return new CreateRecordResponse(id);
     }
 

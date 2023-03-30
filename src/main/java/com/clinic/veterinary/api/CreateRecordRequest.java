@@ -3,13 +3,14 @@ package com.clinic.veterinary.api;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 public class CreateRecordRequest {
 
     private Long doctorId;
 
-    private Long treatmentAreaId;
+    private List<Long> treatmentAreaIds;
 
     private Long animalId;
 
@@ -18,5 +19,4 @@ public class CreateRecordRequest {
     @NotEmpty
     private String recordContent;
 
-    // private Long recordTreatmentAreaId;
 }

@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -29,8 +31,7 @@ public class TreatmentRecordService {
      * 진료기록 등록
      */
     @Transactional
-    public Long treatmentRecord(Long doctorId, Long animalId, Long animalTypeId,  String recordContent){
-
+    public Long treatmentRecord(Long doctorId, Long animalId, Long animalTypeId, String recordContent, List<Long> treatmentAreaIds){
         Doctor doctor = doctorRepository.findOne(doctorId);
         Animal animal = animalRepository.findOne(animalId);
         AnimalType animalType = animalTypeRepository.fineOne(animalTypeId);
@@ -39,18 +40,16 @@ public class TreatmentRecordService {
         TreatmentRecord treatmentRecord = TreatmentRecord.createTreatmentRecord(doctor, animal, animalType, recordContent);
         treatmentRecordRepository.save(treatmentRecord);
 
+        // RecordTreatmentArea 저장
+        for (Long treatmentAreaId : treatmentAreaIds) {
+            TreatmentArea treatmentArea = treatmentAreaRepository.findOne(treatmentAreaId);
+            RecordTreatmentArea recordTreatmentArea = RecordTreatmentArea.createRecordTreatmentArea(treatmentRecord, treatmentArea);
+            recordTreatmentAreaRepository.save(recordTreatmentArea);
+        }
+
         return treatmentRecord.getId();
     }
 
-    @Transactional
-    public Long createRecordTreatmentArea(Long treatmentRecordId, Long treatmentAreaId) {
-        TreatmentRecord treatmentRecord = treatmentRecordRepository.findOne(treatmentRecordId);
-        TreatmentArea treatmentArea = treatmentAreaRepository.findOne(treatmentAreaId);
-
-        RecordTreatmentArea recordTreatmentArea = RecordTreatmentArea.createRecordTreatmentArea(treatmentRecord, treatmentArea);
-        recordTreatmentAreaRepository.save(recordTreatmentArea);
-        return recordTreatmentArea.getId();
-    }
 
     /**
      * 진료기록 수정
