@@ -1,13 +1,16 @@
 package com.clinic.veterinary.api.dto;
 
 import com.clinic.veterinary.domain.TreatmentRecord;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+@Data
+@AllArgsConstructor
 public class TreatmentRecordDto {
     private Long treatmentRecordId; // 진료 기록 고유번호
     private String doctorName; // 의사 이름
@@ -44,5 +47,11 @@ public class TreatmentRecordDto {
 
     }
 
+//    public TreatmentRecordDto(Long treatmentRecordId, String doctorName, String animalName, LocalDateTime recordDate) {
+//        this.treatmentRecordId = treatmentRecordId;
+//        this.doctorName = doctorName;
+//        this.animalName = animalName;
+//        this.recordDate = recordDate;
+//    }
 
 }

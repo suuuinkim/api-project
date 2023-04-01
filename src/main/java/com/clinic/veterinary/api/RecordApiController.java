@@ -89,27 +89,18 @@ public class RecordApiController {
      * 진료기록 검색
      */
     @GetMapping("/api/v1/record/searchRecord")
-    public List<TreatmentRecordDto> searchRecords(@RequestParam String doctorName, String animalName){
-        return treatmentRecordRepository.searchRecords(doctorName, animalName);
+    public List<TreatmentRecordDto> searchRecords(@RequestParam(required = false)String doctorName,
+                                                  @RequestParam(required = false)String animalName){
+        List<TreatmentRecord> records = treatmentRecordRepository.searchRecords(doctorName, animalName);
+
+
+        List<TreatmentRecordDto> collect = records.stream()
+                .map(r -> new TreatmentRecordDto(r))
+                .collect(Collectors.toList());
+
+
+        return collect;
     }
-
-//    /**
-//     * 진료기록 검색 by 의사이름
-//     */
-//    @GetMapping("/api/v1/record/searchByDoctor")
-//    public List<TreatmentRecordDto> searchRecordsByDoctorName(@RequestParam String doctorName){
-//        return treatmentRecordRepository.searchRecordsByDoctorName(doctorName);
-//    }
-//
-//
-//    /**
-//     * 진료기록 검색 by 동물이름
-//     */
-//    @GetMapping("/api/v1/record/searchByAnimal")
-//    public List<TreatmentRecordDto> searchRecordsByAnimalName(@RequestParam String animalName){
-//        return treatmentRecordRepository.searchRecordsByAnimalName(animalName);
-//    }
-
 
 
 }

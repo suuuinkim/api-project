@@ -1,10 +1,7 @@
 package com.clinic.veterinary.repository;
 
 import com.clinic.veterinary.api.dto.TreatmentRecordDto;
-import com.clinic.veterinary.domain.QAnimal;
-import com.clinic.veterinary.domain.QDoctor;
-import com.clinic.veterinary.domain.QTreatmentRecord;
-import com.clinic.veterinary.domain.TreatmentRecord;
+import com.clinic.veterinary.domain.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -30,7 +27,7 @@ public class TreatmentRecordRepository {
         return new JPAQueryFactory(em);
     }
 
-    public List<TreatmentRecordDto> searchRecords(String doctorName, String animalName) {
+    public List<TreatmentRecord> searchRecords(String doctorName, String animalName) {
         QTreatmentRecord qTreatmentRecord = QTreatmentRecord.treatmentRecord;
         QDoctor qDoctor = QDoctor.doctor;
         QAnimal qAnimal = QAnimal.animal;
@@ -43,17 +40,40 @@ public class TreatmentRecordRepository {
             builder.and(qAnimal.name.eq(animalName));
         }
 
-        return queryFactory().select(
-                        Projections.constructor(TreatmentRecordDto.class,
-                                qTreatmentRecord.id, qTreatmentRecord.animal.name,
-                                qTreatmentRecord.doctor.name, qTreatmentRecord.recordDate
-                        ))
-                .from(qTreatmentRecord)
+        return queryFactory().selectFrom(qTreatmentRecord)
                 .join(qTreatmentRecord.doctor, qDoctor)
                 .join(qTreatmentRecord.animal, qAnimal)
                 .where(builder)
                 .fetch();
     }
+
+//    public List<TreatmentRecord> searchRecords(String doctorName, String animalName) {
+//        QTreatmentRecord qTreatmentRecord = QTreatmentRecord.treatmentRecord;
+//        QDoctor qDoctor = QDoctor.doctor;
+//        QAnimal qAnimal = QAnimal.animal;
+//        QAnimalType qAnimalType = QAnimalType.animalType;
+//        BooleanBuilder builder = new BooleanBuilder();
+//
+//        if (doctorName != null) {
+//            builder.and(qDoctor.name.eq(doctorName));
+//        }
+//        if (animalName != null) {
+//            builder.and(qAnimal.name.eq(animalName));
+//        }
+//
+//        return queryFactory().select(
+//                        Projections.constructor(TreatmentRecordDto.class,
+//                                qTreatmentRecord.id, qDoctor.name, qAnimal.name, qAnimalType.name,
+//                                qTreatmentRecord.recordTreatmentAreas, qTreatmentRecord.recordDate, qTreatmentRecord.recordContent,
+//                                qAnimalType.animalTypeTreatmentAreas
+//                        ))
+//                .from(qTreatmentRecord)
+//                .join(qTreatmentRecord.doctor, qDoctor)
+//                .join(qTreatmentRecord.animal, qAnimal)
+//                .join(qTreatmentRecord.animalType, qAnimalType)
+//                .where(builder)
+//                .fetch();
+//    }
 
 //    /**
 //     * 진료기록 검색 by 의사이름
@@ -139,8 +159,8 @@ public class TreatmentRecordRepository {
 //        em.remove(treatmentRecord);
 //    }
 
-    public void delete(Long id) {
-        em.remove(id);
+    public void delete(TreatmentRecord treatmentRecord) {
+        em.remove(treatmentRecord);
     }
 
 
