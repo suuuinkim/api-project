@@ -16,7 +16,6 @@ public class TreatmentRecordDto {
 
     private List<RecordTreatmentAreaDto> recordTreatmentAreas; // 중간테이블
 
-//    private List<TreatmentAreaDto> treatmentAreas; // 기본진료
     private LocalDateTime recordDate; // 진료 날짜
     private String recordContent; // 진료 내용
 
@@ -33,10 +32,6 @@ public class TreatmentRecordDto {
         recordTreatmentAreas = treatmentRecord.getRecordTreatmentAreas().stream()
                 .map(recordTreatmentArea -> new RecordTreatmentAreaDto(recordTreatmentArea))
                 .collect(Collectors.toList());
-
-//        treatmentAreas = treatmentRecord.getTreatmentAreas().stream()
-//                .map(treatmentArea -> new TreatmentAreaDto(treatmentArea))
-//                .collect(Collectors.toList());
 
         recordDate = treatmentRecord.getRecordDate();
         recordContent = treatmentRecord.getRecordContent();

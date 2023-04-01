@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class RecordTreatmentAreaDto {
-
     private Long recordTreatmentAreaId;
 
     private String treatmentAreaName;

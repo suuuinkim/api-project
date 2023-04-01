@@ -37,10 +37,17 @@ public class RecordApiController {
      */
     @PostMapping("/api/v1/record")
     public CreateRecordResponse saveRecordV1(@RequestBody @Valid CreateRecordRequest request){
-        Long id = treatmentRecordService.treatmentRecord(request.getDoctorId(), request.getAnimalId(),
-                request.getAnimalTypeId(), request.getRecordContent(), request.getTreatmentAreaIds());
 
-        return new CreateRecordResponse(id);
+        try{
+            Long id = treatmentRecordService.treatmentRecord(request.getDoctorId(), request.getAnimalId(),
+                    request.getAnimalTypeId(), request.getRecordContent(), request.getTreatmentAreaIds());
+
+            return new CreateRecordResponse(true, id, "진료기록을 저장하였습니다.");
+
+        }catch (Exception ex){
+            return new CreateRecordResponse(false, null, "진료기록을 저장하는데 실패했습니다. 확인해주세요.");
+
+        }
     }
 
 
@@ -50,9 +57,14 @@ public class RecordApiController {
     @PutMapping("/api/v1/record/{id}")
     public UpdateRecordResponse updateRecordV1(@PathVariable("id") Long id, @RequestBody @Valid UpdateRecordRequest request){
 
-        treatmentRecordService.update(id, request.getRecordContent());
-        TreatmentRecord findRecord = treatmentRecordService.findOne(id);
-        return new UpdateRecordResponse(findRecord.getId(), findRecord.getRecordContent());
+        try{
+            treatmentRecordService.update(id, request.getRecordContent());
+            TreatmentRecord findRecord = treatmentRecordService.findOne(id);
+
+            return new UpdateRecordResponse(true, findRecord.getId(), "진료기록을 수정하였습니다.");
+        }catch (Exception ex){
+            return new UpdateRecordResponse(false, null, "진료기록을 수정하는데 실패했습니다. 확인해주세요.");
+        }
     }
 
     /**
@@ -63,19 +75,41 @@ public class RecordApiController {
         return treatmentRecordService.delete(id);
     }
 
+
+    /**
+     * 진료기록 삭제 by 동물 이름
+     */
+    @DeleteMapping("/api/v1/record/deleteByAnimal")
+    public DeleteRecordResponse deleteRecordsByAnimalName(@RequestParam String animalName) {
+        return treatmentRecordService.deleteRecordByAnimalName(animalName);
+    }
+
+
     /**
      * 진료기록 검색
      */
-    @GetMapping("/api/v1/record/search")
-    public List<TreatmentRecordDto> searchRecordV1(@RequestParam String doctorName) {
-        List<TreatmentRecord> records = treatmentRecordRepository.searchRecordsByDoctorName(doctorName);
-
-        List<TreatmentRecordDto> collect = records.stream()
-                .map(r -> new TreatmentRecordDto(r))
-                .collect(Collectors.toList());
-
-        return collect;
+    @GetMapping("/api/v1/record/searchRecord")
+    public List<TreatmentRecordDto> searchRecords(@RequestParam String doctorName, String animalName){
+        return treatmentRecordRepository.searchRecords(doctorName, animalName);
     }
+
+//    /**
+//     * 진료기록 검색 by 의사이름
+//     */
+//    @GetMapping("/api/v1/record/searchByDoctor")
+//    public List<TreatmentRecordDto> searchRecordsByDoctorName(@RequestParam String doctorName){
+//        return treatmentRecordRepository.searchRecordsByDoctorName(doctorName);
+//    }
+//
+//
+//    /**
+//     * 진료기록 검색 by 동물이름
+//     */
+//    @GetMapping("/api/v1/record/searchByAnimal")
+//    public List<TreatmentRecordDto> searchRecordsByAnimalName(@RequestParam String animalName){
+//        return treatmentRecordRepository.searchRecordsByAnimalName(animalName);
+//    }
+
 
 
 }

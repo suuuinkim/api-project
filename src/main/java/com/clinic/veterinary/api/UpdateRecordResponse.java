@@ -5,8 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class UpdateRecordResponse {
+
     private Long id;
-    private String recordContent;
+
+    private boolean success;
+
+    private String message;
+
+    public UpdateRecordResponse(Boolean success, Long id, String message) {
+        this.success = success;
+        this.id = id;
+        this.message = message;
+    }
 }
