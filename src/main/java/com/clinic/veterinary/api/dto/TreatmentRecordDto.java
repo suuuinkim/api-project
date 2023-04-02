@@ -47,11 +47,5 @@ public class TreatmentRecordDto {
 
     }
 
-//    public TreatmentRecordDto(Long treatmentRecordId, String doctorName, String animalName, LocalDateTime recordDate) {
-//        this.treatmentRecordId = treatmentRecordId;
-//        this.doctorName = doctorName;
-//        this.animalName = animalName;
-//        this.recordDate = recordDate;
-//    }
 
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class AnimalTypeTreatmentAreaDto {
-
     private Long animalTypeTreatmentAreaId;
     private String animalTypeTreatmentAreaName;
 

@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 public class TreatmentAreaRepository {
     private final EntityManager em;
-
     public TreatmentArea findOne(Long id){
         return em.find(TreatmentArea.class, id);
     }

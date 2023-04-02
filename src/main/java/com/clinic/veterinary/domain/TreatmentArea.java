@@ -20,10 +20,6 @@ public class TreatmentArea {
     @OneToMany(mappedBy = "treatmentArea", cascade = CascadeType.ALL)
     private List<RecordTreatmentArea> recordTreatmentAreas = new ArrayList<>();
 
-//    @ManyToOne
-//    @JoinColumn(name = "treatmentRecord_id")
-//    private TreatmentRecord treatmentRecord;
-
     @Column(name = "treatmentName")
     private String name;
 

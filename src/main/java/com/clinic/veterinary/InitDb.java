@@ -66,11 +66,8 @@ public class InitDb {
             em.persist(treatmentRecord1);
 
             RecordTreatmentArea recordTreatmentArea1 = RecordTreatmentArea.createRecordTreatmentArea(treatmentRecord1, treatmentArea1);
-            //RecordTreatmentArea recordTreatmentArea2 = RecordTreatmentArea.createRecordTreatmentArea(treatmentArea2);
             em.persist(recordTreatmentArea1);
 
-            //TreatmentRecord treatmentRecord2 = TreatmentRecord.createTreatmentRecord(doctor2, animal2, animalType2, "양호합니다!!!!!!!! 양호해요", treatmentArea1, treatmentArea2);
-            //em.persist(treatmentRecord2);
 
         }
 

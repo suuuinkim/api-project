@@ -5,6 +5,7 @@ import com.clinic.veterinary.domain.TreatmentRecord;
 import com.clinic.veterinary.repository.TreatmentRecordRepository;
 import com.clinic.veterinary.service.TreatmentRecordService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -75,13 +76,22 @@ public class RecordApiController {
         return treatmentRecordService.delete(id);
     }
 
-
     /**
-     * 진료기록 삭제 by 동물 이름
+     * 진료기록 삭제 by 동물이름
+     * @param animalName
+     * @return
      */
-    @DeleteMapping("/api/v1/record/deleteByAnimal")
-    public DeleteRecordResponse deleteRecordsByAnimalName(@RequestParam String animalName) {
-        return treatmentRecordService.deleteRecordByAnimalName(animalName);
+    @DeleteMapping("/api/v1/records/{animalName}")
+    @Transactional
+    public DeleteRecordResponse deleteRecordsByAnimalNameV1(@PathVariable("animalName") String animalName) {
+        List<TreatmentRecord> searchRecordsByAnimalName = treatmentRecordRepository.searchRecords(null, animalName);
+
+        for (TreatmentRecord record : searchRecordsByAnimalName) {
+            treatmentRecordRepository.delete(record);
+        }
+
+        return new DeleteRecordResponse(true,  "진료기록을 삭제했습니다.");
+//        return (long) searchRecordsByAnimalName.size();
     }
 
 

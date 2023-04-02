@@ -17,8 +17,7 @@ public class Doctor {
     private Long id;
 
     private String name; // 의사이름
-
-
+    
     @JsonIgnore
     @OneToMany(mappedBy = "doctor")
     private List<TreatmentRecord> treatmentRecords = new ArrayList<>();

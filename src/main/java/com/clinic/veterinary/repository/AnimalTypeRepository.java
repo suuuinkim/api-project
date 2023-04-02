@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 @Repository
 @RequiredArgsConstructor
 public class AnimalTypeRepository {
-
     private final EntityManager em;
 
     public AnimalType fineOne(Long id){

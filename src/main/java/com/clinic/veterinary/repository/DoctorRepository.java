@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 public class DoctorRepository {
     private final EntityManager em;
-
     public Doctor findOne(Long id){
         return em.find(Doctor.class, id);
     }

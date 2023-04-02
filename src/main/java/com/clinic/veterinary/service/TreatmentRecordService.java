@@ -1,8 +1,6 @@
 package com.clinic.veterinary.service;
 
 import com.clinic.veterinary.api.DeleteRecordResponse;
-import com.clinic.veterinary.api.RecordNotFoundException;
-import com.clinic.veterinary.api.dto.TreatmentRecordDto;
 import com.clinic.veterinary.domain.*;
 import com.clinic.veterinary.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -71,53 +69,10 @@ public class TreatmentRecordService {
 
         if(treatmentRecord != null){ // 삭제 성공
             treatmentRecordRepository.delete(treatmentRecord);
-            return new DeleteRecordResponse(true, id, "진료기록을 삭제했습니다.");
+            return new DeleteRecordResponse(true, "진료기록을 삭제했습니다.");
         }else{ // 삭제 실패
-            return new DeleteRecordResponse(false, null, "진료기록을 삭제하지 못했습니다. 확인해주세요.");
+            return new DeleteRecordResponse(false, "진료기록을 삭제하지 못했습니다. 확인해주세요.");
         }
     }
 
-    /**
-     * 동물 이름을 기반으로 진료 기록 삭제
-     */
-    public DeleteRecordResponse deleteRecordByAnimalName(String animalName) {
-        List<TreatmentRecord> records = treatmentRecordRepository.searchRecords(null, animalName);
-        if (records.isEmpty()) {
-            throw new RecordNotFoundException(false, "검색결과가 없습니다.");
-        }
-        for (TreatmentRecord record : records) {
-            treatmentRecordRepository.delete(record);
-        }
-        return new DeleteRecordResponse(true, null, "진료기록을 삭제했습니다.");
-    }
-
-//    /**
-//     * 진료기록 삭제 by 동물 이름
-//     */
-//    public DeleteRecordResponse deleteRecordByAnimalName(String animalName) {
-////        List<TreatmentRecordDto> records = treatmentRecordRepository.searchRecordsByAnimalName(animalName);
-//        List<TreatmentRecordDto> records = treatmentRecordRepository.searchRecords(null, animalName);
-//        if (records.isEmpty()) {
-//            throw new RecordNotFoundException(false, "검색결과가 없습니다.");
-//        }
-//        for (TreatmentRecordDto record : records) {
-//            treatmentRecordRepository.delete(record);
-//        }
-//        return new DeleteRecordResponse(true, null, "진료기록을 삭제했습니다.");
-//
-//    }
-
-//    /**
-//     * 진료기록 검색 by 의사이름
-//     */
-//    public List<TreatmentRecord> searchRecordsByDoctorName(String doctorName) {
-//        return treatmentRecordRepository.searchRecordsByDoctorName(doctorName);
-//    }
-//
-//    /**
-//     * 진료기록 검색 by 동물이름
-//     */
-//    public List<TreatmentRecord> searchRecordsByAnimalName(String animalName) {
-//        return treatmentRecordRepository.searchRecordsByAnimalName(animalName);
-//    }
 }

@@ -19,7 +19,6 @@ public class Animal {
     @Column(name="animal_id")
     private Long id;
 
-
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "animalType_id")
     private AnimalType animalType;
