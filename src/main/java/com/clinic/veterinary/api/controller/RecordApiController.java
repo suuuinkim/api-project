@@ -1,9 +1,11 @@
-package com.clinic.veterinary.api;
+package com.clinic.veterinary.api.controller;
 
+import com.clinic.veterinary.api.*;
 import com.clinic.veterinary.api.dto.TreatmentRecordDto;
 import com.clinic.veterinary.domain.TreatmentRecord;
 import com.clinic.veterinary.repository.TreatmentRecordRepository;
 import com.clinic.veterinary.service.TreatmentRecordService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,7 @@ public class RecordApiController {
      * 진료기록 조회
      */
     @GetMapping("/api/v1/records")
+    @ApiOperation(value = "진료기록 조회 API")
     public List<TreatmentRecordDto> recordsV1(){
         List<TreatmentRecord> records = treatmentRecordRepository.findAllRecord();
 
@@ -37,6 +40,7 @@ public class RecordApiController {
      * 진료기록 저장
      */
     @PostMapping("/api/v1/record")
+    @ApiOperation(value = "진료기록 저장 API")
     public CreateRecordResponse saveRecordV1(@RequestBody @Valid CreateRecordRequest request){
 
         try{
@@ -56,6 +60,7 @@ public class RecordApiController {
      * 진료기록 수정
      */
     @PutMapping("/api/v1/record/{id}")
+    @ApiOperation(value = "진료기록 수정 API")
     public UpdateRecordResponse updateRecordV1(@PathVariable("id") Long id, @RequestBody @Valid UpdateRecordRequest request){
 
         try{
@@ -72,16 +77,16 @@ public class RecordApiController {
      * 진료기록 삭제
      */
     @DeleteMapping("/api/v1/record/{id}")
+    @ApiOperation(value = "진료기록 삭제 API")
     public DeleteRecordResponse deleteRecordV1(@PathVariable("id") Long id){
         return treatmentRecordService.delete(id);
     }
 
     /**
      * 진료기록 삭제 by 동물이름
-     * @param animalName
-     * @return
      */
     @DeleteMapping("/api/v1/records/{animalName}")
+    @ApiOperation(value = "진료기록 동물이름으로 삭제 API")
     @Transactional
     public DeleteRecordResponse deleteRecordsByAnimalNameV1(@PathVariable("animalName") String animalName) {
         List<TreatmentRecord> searchRecordsByAnimalName = treatmentRecordRepository.searchRecords(null, animalName);
@@ -91,7 +96,6 @@ public class RecordApiController {
         }
 
         return new DeleteRecordResponse(true,  "진료기록을 삭제했습니다.");
-//        return (long) searchRecordsByAnimalName.size();
     }
 
 
@@ -99,6 +103,7 @@ public class RecordApiController {
      * 진료기록 검색
      */
     @GetMapping("/api/v1/record/searchRecord")
+    @ApiOperation(value = "진료기록 검색 API")
     public List<TreatmentRecordDto> searchRecords(@RequestParam(required = false)String doctorName,
                                                   @RequestParam(required = false)String animalName){
         List<TreatmentRecord> records = treatmentRecordRepository.searchRecords(doctorName, animalName);
@@ -108,9 +113,7 @@ public class RecordApiController {
                 .map(r -> new TreatmentRecordDto(r))
                 .collect(Collectors.toList());
 
-
         return collect;
     }
-
 
 }
