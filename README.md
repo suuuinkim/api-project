@@ -5,29 +5,33 @@
 - {host 주소}/swagger-ui.html#
 - 해당 주소에서 상세 api 명세서를 확인 할 수 있습니다.  
 
+<<<<<<< HEAD
 ![](document/api_img/img.png)
+=======
+![](document/api_img/img.png)  
+>>>>>>> 7e5f2ff0442827e52391e18eaf1de56532dc1a87
 
 - 진료기록 저장  
-<br>
+
 ![](document/api_img/img_4.png)  
-<br>
+
 - 진료기록 수정  
-<br/>
+
 ![](document/api_img/img_2.png)  
-<br>
+
 - 진료기록 삭제  
-<br/>
+
 ![](document/api_img/img_3.png)  
-<br>
+
 - 진료기록 검색  
-<br/>
+
 ![](document/api_img/img_5.png)  
-<br>
+
 - 진료기록 조회  
-<br/>
+
 ![](document/api_img/img_6.png)  
-<br>
+
 - 진료기록 삭제(동물이름)  
-<br/>
+
 ![](document/api_img/img_7.png)
 
