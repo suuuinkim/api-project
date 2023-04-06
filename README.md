@@ -6,7 +6,6 @@
 - 해당 주소에서 상세 api 명세서를 확인 할 수 있습니다.  
 
 ![](document/api_img/img.png)  
-![](document/api_img/img.png)  
 
 
 - 진료기록 저장  
