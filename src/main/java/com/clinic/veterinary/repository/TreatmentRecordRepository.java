@@ -51,8 +51,7 @@ public class TreatmentRecordRepository {
         return em.createQuery(
                 "select r from TreatmentRecord r" +
                         " join fetch r.doctor d" +
-                        " join fetch r.animal a" +
-                        " join fetch r.animalType at"
+                        " join fetch r.animal a"
         ).getResultList();
     }
 

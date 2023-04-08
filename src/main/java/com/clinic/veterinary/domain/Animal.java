@@ -27,7 +27,8 @@ public class Animal {
     @OneToMany(mappedBy = "animal")
     private List<TreatmentRecord> treatmentRecords = new ArrayList<>();
 
-    private String name;
+    @Column(nullable = false, length = 10)
+    private String name; // 동물이름
 
     // === 연관관계 메서드 === //
     public void addTreatmentRecord(TreatmentRecord treatmentRecord){

@@ -16,6 +16,7 @@ public class Doctor {
     @Column(name = "doctor_id")
     private Long id;
 
+    @Column(nullable = false, length = 10)
     private String name; // 의사이름
     
     @JsonIgnore

@@ -26,13 +26,12 @@ public class TreatmentRecord {
     @JoinColumn(name = "animal_id")
     private Animal animal;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "animalType_id")
-    private AnimalType animalType;
+//    @ManyToOne(fetch = LAZY)
+//    @JoinColumn(name = "animalType_id")
+//    private AnimalType animalType;
 
     @OneToMany(mappedBy = "treatmentRecord", cascade = CascadeType.ALL)
     private List<RecordTreatmentArea> recordTreatmentAreas = new ArrayList<>();
-
 
     private LocalDateTime recordDate; // 진료일자
 
@@ -49,11 +48,9 @@ public class TreatmentRecord {
 
     public static TreatmentRecord createTreatmentRecord(Doctor doctor, Animal animal, AnimalType animalType, String recordContent, RecordTreatmentArea... recordTreatmentAreas){
         TreatmentRecord treatmentRecord = new TreatmentRecord();
+
         treatmentRecord.setDoctor(doctor);
-
         treatmentRecord.setAnimal(animal);
-        treatmentRecord.setAnimalType(animalType);
-
         treatmentRecord.setRecordDate(LocalDateTime.now());
         treatmentRecord.setRecordContent(recordContent);
 

@@ -16,15 +16,12 @@ public class AnimalType {
     @Column(name = "animalType_id")
     private Long id;
 
+    @Column(nullable = false, length = 10)
     private String name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "animalType")
     private List<Animal> animals = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "animalType")
-    private List<TreatmentRecord> treatmentRecords = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "animalType")

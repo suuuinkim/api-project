@@ -20,7 +20,7 @@ public class TreatmentArea {
     @OneToMany(mappedBy = "treatmentArea", cascade = CascadeType.ALL)
     private List<RecordTreatmentArea> recordTreatmentAreas = new ArrayList<>();
 
-    @Column(name = "treatmentName")
+    @Column(name = "treatmentName", nullable = false, length = 20)
     private String name;
 
     public static TreatmentArea createTreatmentArea(String name) {

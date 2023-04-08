@@ -19,6 +19,7 @@ public class AnimalTypeTreatmentArea {
     @JoinColumn(name = "animalType_id")
     private AnimalType animalType;
 
+    @Column(nullable = false, length = 20)
     private String name;
 
     // === 생성메소드 === //
