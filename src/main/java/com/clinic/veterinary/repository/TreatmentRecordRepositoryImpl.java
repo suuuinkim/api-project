@@ -1,5 +1,7 @@
 package com.clinic.veterinary.repository;
 
+import com.clinic.veterinary.domain.RecordSearchCondition;
+import com.clinic.veterinary.domain.TreatmentRecord;
 import com.clinic.veterinary.repository.domain.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;

@@ -1,4 +1,4 @@
-package com.clinic.veterinary.repository.domain;
+package com.clinic.veterinary.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

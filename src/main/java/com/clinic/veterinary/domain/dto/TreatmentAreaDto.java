@@ -1,6 +1,6 @@
-package com.clinic.veterinary.repository.domain.dto;
+package com.clinic.veterinary.domain.dto;
 
-import com.clinic.veterinary.repository.domain.TreatmentArea;
+import com.clinic.veterinary.domain.TreatmentArea;
 import lombok.Data;
 
 @Data

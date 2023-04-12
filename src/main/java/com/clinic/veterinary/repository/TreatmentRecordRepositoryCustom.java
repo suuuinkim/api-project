@@ -1,8 +1,7 @@
 package com.clinic.veterinary.repository;
 
-import com.clinic.veterinary.repository.domain.RecordSearchCondition;
-import com.clinic.veterinary.repository.domain.TreatmentRecord;
-import com.clinic.veterinary.repository.domain.dto.TreatmentRecordDto;
+import com.clinic.veterinary.domain.RecordSearchCondition;
+import com.clinic.veterinary.domain.TreatmentRecord;
 
 import java.util.List;
 

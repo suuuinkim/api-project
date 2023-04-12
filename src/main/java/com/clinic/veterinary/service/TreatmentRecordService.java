@@ -1,8 +1,8 @@
 package com.clinic.veterinary.service;
 
 import com.clinic.veterinary.api.DeleteRecordResponse;
+import com.clinic.veterinary.domain.*;
 import com.clinic.veterinary.repository.*;
-import com.clinic.veterinary.repository.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

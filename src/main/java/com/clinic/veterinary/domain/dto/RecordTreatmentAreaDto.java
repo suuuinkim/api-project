@@ -1,6 +1,6 @@
-package com.clinic.veterinary.repository.domain.dto;
+package com.clinic.veterinary.domain.dto;
 
-import com.clinic.veterinary.repository.domain.RecordTreatmentArea;
+import com.clinic.veterinary.domain.RecordTreatmentArea;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
