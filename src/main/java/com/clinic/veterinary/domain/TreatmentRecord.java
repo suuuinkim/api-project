@@ -34,6 +34,13 @@ public class TreatmentRecord {
 
     private String recordContent; // 진료내용
 
+    public TreatmentRecord() {
+    }
+
+    public TreatmentRecord(String doctorName, String animalName, String animalTypeName, String recordContent) {
+    }
+
+
 
     // ==== 생성 메서드 ==== //
     public void addRecordTreatmentArea(RecordTreatmentArea recordTreatmentArea){

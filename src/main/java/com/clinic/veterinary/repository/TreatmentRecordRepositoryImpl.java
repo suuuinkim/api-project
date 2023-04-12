@@ -1,8 +1,6 @@
 package com.clinic.veterinary.repository;
 
-import com.clinic.veterinary.domain.RecordSearchCondition;
-import com.clinic.veterinary.domain.TreatmentRecord;
-import com.clinic.veterinary.repository.domain.*;
+import com.clinic.veterinary.domain.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -10,7 +8,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static com.clinic.veterinary.repository.domain.QTreatmentRecord.treatmentRecord;
+import static com.clinic.veterinary.domain.QTreatmentRecord.treatmentRecord;
 import static org.springframework.util.StringUtils.hasText;
 
 public class TreatmentRecordRepositoryImpl implements TreatmentRecordRepositoryCustom{
@@ -22,13 +20,13 @@ public class TreatmentRecordRepositoryImpl implements TreatmentRecordRepositoryC
     }
 
 
-    private final QTreatmentRecord qTreatmentRecord = QTreatmentRecord.treatmentRecord;
+    private final QTreatmentRecord qTreatmentRecord = treatmentRecord;
     private final QDoctor qDoctor = QDoctor.doctor;
 
 
     @Override
     public List<TreatmentRecord> search(RecordSearchCondition condition) {
-        QTreatmentRecord qTreatmentRecord = QTreatmentRecord.treatmentRecord;
+        QTreatmentRecord qTreatmentRecord = treatmentRecord;
         QDoctor qDoctor = QDoctor.doctor;
         QAnimal qAnimal = QAnimal.animal;
         BooleanBuilder builder = new BooleanBuilder();
