@@ -1,17 +1,11 @@
 package com.clinic.veterinary.repository;
 
-import com.clinic.veterinary.domain.AnimalType;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import com.clinic.veterinary.repository.domain.AnimalType;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
+public interface AnimalTypeRepository extends JpaRepository<AnimalType, Long> {
 
-@Repository
-@RequiredArgsConstructor
-public class AnimalTypeRepository {
-    private final EntityManager em;
-
-    public AnimalType fineOne(Long id){
-        return em.find(AnimalType.class, id);
-    }
+//    public AnimalType fineOne(Long id){
+//        return em.find(AnimalType.class, id);
+//    }
 }

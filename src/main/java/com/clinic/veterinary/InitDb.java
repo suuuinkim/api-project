@@ -1,6 +1,6 @@
 package com.clinic.veterinary;
 
-import com.clinic.veterinary.domain.*;
+import com.clinic.veterinary.repository.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

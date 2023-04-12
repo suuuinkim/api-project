@@ -1,5 +1,6 @@
-package com.clinic.veterinary.domain;
+package com.clinic.veterinary.repository.domain;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,5 +30,15 @@ public class AnimalTypeTreatmentArea {
         animalTypeTreatmentArea.setName(name);
 
         return animalTypeTreatmentArea;
+    }
+
+    public AnimalTypeTreatmentArea() {
+    }
+
+    @QueryProjection
+    public AnimalTypeTreatmentArea(Long id, AnimalType animalType, String name) {
+        this.id = id;
+        this.animalType = animalType;
+        this.name = name;
     }
 }

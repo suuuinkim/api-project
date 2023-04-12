@@ -1,17 +1,15 @@
-package com.clinic.veterinary.api.dto;
+package com.clinic.veterinary.repository.domain.dto;
 
-import com.clinic.veterinary.domain.AnimalTypeTreatmentArea;
-import com.clinic.veterinary.domain.TreatmentRecord;
-import lombok.AllArgsConstructor;
+import com.clinic.veterinary.repository.domain.TreatmentRecord;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 public class TreatmentRecordDto {
     private Long treatmentRecordId; // 진료 기록 고유번호
     private String doctorName; // 의사 이름
@@ -25,6 +23,7 @@ public class TreatmentRecordDto {
     private String recordContent; // 진료 내용
 
     private List<AnimalTypeTreatmentAreaDto> animalTypeTreatmentAreas;
+
 
 
     public TreatmentRecordDto(TreatmentRecord treatmentRecord) {
@@ -46,8 +45,17 @@ public class TreatmentRecordDto {
                 .map(ta -> new AnimalTypeTreatmentAreaDto(ta))
                 .collect(Collectors.toList());
 
-
     }
 
-
+    @QueryProjection
+    public TreatmentRecordDto(Long treatmentRecordId, String doctorName, String animalName, String animalType, List<RecordTreatmentAreaDto> recordTreatmentAreas, LocalDateTime recordDate, String recordContent, List<AnimalTypeTreatmentAreaDto> animalTypeTreatmentAreas) {
+        this.treatmentRecordId = treatmentRecordId;
+        this.doctorName = doctorName;
+        this.animalName = animalName;
+        this.animalType = animalType;
+        this.recordTreatmentAreas = recordTreatmentAreas;
+        this.recordDate = recordDate;
+        this.recordContent = recordContent;
+        this.animalTypeTreatmentAreas = animalTypeTreatmentAreas;
+    }
 }

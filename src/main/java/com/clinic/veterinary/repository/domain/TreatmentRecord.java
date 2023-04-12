@@ -1,4 +1,4 @@
-package com.clinic.veterinary.domain;
+package com.clinic.veterinary.repository.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +26,6 @@ public class TreatmentRecord {
     @JoinColumn(name = "animal_id")
     private Animal animal;
 
-//    @ManyToOne(fetch = LAZY)
-//    @JoinColumn(name = "animalType_id")
-//    private AnimalType animalType;
 
     @OneToMany(mappedBy = "treatmentRecord", cascade = CascadeType.ALL)
     private List<RecordTreatmentArea> recordTreatmentAreas = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.clinic.veterinary.api.dto;
+package com.clinic.veterinary.repository.domain.dto;
 
 import lombok.Data;
 

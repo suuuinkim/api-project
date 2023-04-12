@@ -1,4 +1,4 @@
-package com.clinic.veterinary.domain;
+package com.clinic.veterinary.repository.domain;
 
 import lombok.Getter;
 import lombok.Setter;

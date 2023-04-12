@@ -1,13 +1,14 @@
 package com.clinic.veterinary.service;
 
 import com.clinic.veterinary.api.DeleteRecordResponse;
-import com.clinic.veterinary.domain.*;
 import com.clinic.veterinary.repository.*;
+import com.clinic.veterinary.repository.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -23,8 +24,8 @@ public class TreatmentRecordService {
 
     private final RecordTreatmentAreaRepository recordTreatmentAreaRepository;
 
-    public TreatmentRecord findOne(Long id){
-        return treatmentRecordRepository.findOne(id);
+    public Optional<TreatmentRecord> findOne(Long id){
+        return treatmentRecordRepository.findById(id);
     }
 
     /**
@@ -32,18 +33,18 @@ public class TreatmentRecordService {
      */
     @Transactional
     public Long treatmentRecord(Long doctorId, Long animalId, Long animalTypeId, String recordContent, List<Long> treatmentAreaIds){
-        Doctor doctor = doctorRepository.findOne(doctorId);
-        Animal animal = animalRepository.findOne(animalId);
-        AnimalType animalType = animalTypeRepository.fineOne(animalTypeId);
+        Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+        Optional<Animal> animal = animalRepository.findById(animalId);
+        Optional<AnimalType> animalType = animalTypeRepository.findById(animalTypeId);
 
         // 진료 등록
-        TreatmentRecord treatmentRecord = TreatmentRecord.createTreatmentRecord(doctor, animal, animalType, recordContent);
+        TreatmentRecord treatmentRecord = TreatmentRecord.createTreatmentRecord(doctor.get(), animal.get(), animalType.get(), recordContent);
         treatmentRecordRepository.save(treatmentRecord);
 
         // RecordTreatmentArea 저장
         for (Long treatmentAreaId : treatmentAreaIds) {
-            TreatmentArea treatmentArea = treatmentAreaRepository.findOne(treatmentAreaId);
-            RecordTreatmentArea recordTreatmentArea = RecordTreatmentArea.createRecordTreatmentArea(treatmentRecord, treatmentArea);
+            Optional<TreatmentArea> treatmentArea = treatmentAreaRepository.findById(treatmentAreaId);
+            RecordTreatmentArea recordTreatmentArea = RecordTreatmentArea.createRecordTreatmentArea(treatmentRecord, treatmentArea.get());
             recordTreatmentAreaRepository.save(recordTreatmentArea);
         }
 
@@ -56,8 +57,8 @@ public class TreatmentRecordService {
      */
     @Transactional
     public void update(Long id, String recordContent){
-        TreatmentRecord treatmentRecord = treatmentRecordRepository.findOne(id);
-        treatmentRecord.setRecordContent(recordContent);
+        Optional<TreatmentRecord> treatmentRecord = treatmentRecordRepository.findById(id);
+        treatmentRecord.get().setRecordContent(recordContent);
     }
 
     /**
@@ -65,10 +66,10 @@ public class TreatmentRecordService {
      */
     @Transactional
     public DeleteRecordResponse delete(Long id){
-        TreatmentRecord treatmentRecord = treatmentRecordRepository.findOne(id);
+        Optional<TreatmentRecord> treatmentRecord = treatmentRecordRepository.findById(id);
 
         if(treatmentRecord != null){ // 삭제 성공
-            treatmentRecordRepository.delete(treatmentRecord);
+            treatmentRecordRepository.deleteById(treatmentRecord.get().getId());
             return new DeleteRecordResponse(true, "진료기록을 삭제했습니다.");
         }else{ // 삭제 실패
             return new DeleteRecordResponse(false, "진료기록을 삭제하지 못했습니다. 확인해주세요.");
