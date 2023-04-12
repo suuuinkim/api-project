@@ -100,6 +100,7 @@ public class RecordApiController {
 //    }
 //
 //
+<<<<<<< HEAD
     /**
      * 진료기록 검색
      */
@@ -115,5 +116,23 @@ public class RecordApiController {
 
         return collect;
     }
+=======
+//    /**
+//     * 진료기록 검색
+//     */
+//    @GetMapping("/api/v1/record/searchRecord")
+//    @ApiOperation(value = "진료기록 검색 API")
+//    public List<TreatmentRecordDto> searchRecords(@RequestParam(required = false)String doctorName,
+//                                                  @RequestParam(required = false)String animalName){
+//        List<TreatmentRecord> records = treatmentRecordRepository.searchRecords(doctorName, animalName);
+//
+//
+//        List<TreatmentRecordDto> collect = records.stream()
+//                .map(r -> new TreatmentRecordDto(r))
+//                .collect(Collectors.toList());
+//
+//        return collect;
+//    }
+>>>>>>> 7969dc5c2dc51faef4445082aa3275cedd68e017
 
 }
