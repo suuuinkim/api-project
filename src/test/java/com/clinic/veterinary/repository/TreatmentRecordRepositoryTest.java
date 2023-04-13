@@ -21,9 +21,7 @@ public class TreatmentRecordRepositoryTest {
     EntityManager em;
     @Autowired
     TreatmentRecordRepository treatmentRecordRepository;
-
     JPAQueryFactory queryFactory;
-
 
     @Test
     public void findAll() throws Exception{

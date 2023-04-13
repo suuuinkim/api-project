@@ -16,7 +16,6 @@ public class TreatmentArea {
     @Column(name = "treatmentArea_id")
     private Long id;
 
-
     @OneToMany(mappedBy = "treatmentArea", cascade = CascadeType.ALL)
     private List<RecordTreatmentArea> recordTreatmentAreas = new ArrayList<>();
 

@@ -9,19 +9,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-// @AllArgsConstructor
 public class TreatmentRecordDto {
     private Long treatmentRecordId; // 진료 기록 고유번호
     private String doctorName; // 의사 이름
     private String animalName; // 동물 이름
-
     private String animalType; // 동물 타입
-
     private List<RecordTreatmentAreaDto> recordTreatmentAreas; // 중간테이블
-
     private LocalDateTime recordDate; // 진료 날짜
     private String recordContent; // 진료 내용
-
     private List<AnimalTypeTreatmentAreaDto> animalTypeTreatmentAreas;
 
 

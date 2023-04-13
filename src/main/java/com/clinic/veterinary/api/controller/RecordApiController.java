@@ -67,8 +67,8 @@ public class RecordApiController {
         try{
             treatmentRecordService.update(id, request.getRecordContent());
             Optional<TreatmentRecord> findRecord = treatmentRecordService.findOne(id);
-
             return new UpdateRecordResponse(true, findRecord.get().getId(), "진료기록을 수정하였습니다.");
+
         }catch (Exception ex){
             return new UpdateRecordResponse(false, null, "진료기록을 수정하는데 실패했습니다. 확인해주세요.");
         }
@@ -80,7 +80,14 @@ public class RecordApiController {
     @DeleteMapping("/api/v1/record/{id}")
     @ApiOperation(value = "진료기록 삭제 API")
     public DeleteRecordResponse deleteRecordV1(@PathVariable("id") Long id){
-        return treatmentRecordService.delete(id);
+
+        try{
+            treatmentRecordService.delete(id);
+            return new DeleteRecordResponse(true, "진료기록을 삭제했습니다.");
+        }catch (Exception ex){
+            return new DeleteRecordResponse(false, "진료기록을 삭제하지 못했습니다. 확인해주세요.");
+        }
+
     }
 
     /**
@@ -109,7 +116,6 @@ public class RecordApiController {
     @ApiOperation(value = "진료기록 검색 API")
     public List<TreatmentRecordDto> searchRecords(RecordSearchCondition condition){
         List<TreatmentRecord> records = treatmentRecordRepository.search(condition);
-
 
         List<TreatmentRecordDto> collect = records.stream()
                 .map(r -> new TreatmentRecordDto(r))

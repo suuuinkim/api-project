@@ -12,13 +12,10 @@ import static com.clinic.veterinary.domain.QTreatmentRecord.treatmentRecord;
 import static org.springframework.util.StringUtils.hasText;
 
 public class TreatmentRecordRepositoryImpl implements TreatmentRecordRepositoryCustom{
-
     private final JPAQueryFactory queryFactory;
-
     public TreatmentRecordRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
-
 
     private final QTreatmentRecord qTreatmentRecord = treatmentRecord;
     private final QDoctor qDoctor = QDoctor.doctor;

@@ -1,6 +1,5 @@
 package com.clinic.veterinary.service;
 
-import com.clinic.veterinary.api.DeleteRecordResponse;
 import com.clinic.veterinary.domain.*;
 import com.clinic.veterinary.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -64,16 +63,12 @@ public class TreatmentRecordService {
     /**
      * 진료기록 삭제
      */
-    @Transactional
-    public DeleteRecordResponse delete(Long id){
-        Optional<TreatmentRecord> treatmentRecord = treatmentRecordRepository.findById(id);
 
-        if(treatmentRecord != null){ // 삭제 성공
-            treatmentRecordRepository.deleteById(treatmentRecord.get().getId());
-            return new DeleteRecordResponse(true, "진료기록을 삭제했습니다.");
-        }else{ // 삭제 실패
-            return new DeleteRecordResponse(false, "진료기록을 삭제하지 못했습니다. 확인해주세요.");
-        }
+    @Transactional
+    public void delete(Long id){
+        Optional<TreatmentRecord> treatmentRecord = treatmentRecordRepository.findById(id);
+        treatmentRecordRepository.deleteById(treatmentRecord.get().getId());
     }
+
 
 }
