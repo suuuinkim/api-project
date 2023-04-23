@@ -48,6 +48,7 @@ public class RecordApiController {
             Long id = treatmentRecordService.treatmentRecord(request.getDoctorId(), request.getAnimalId(),
                     request.getAnimalTypeId(), request.getRecordContent(), request.getTreatmentAreaIds());
 
+
             return new CreateRecordResponse(true, id, "진료기록을 저장하였습니다.");
 
         }catch (Exception ex){
