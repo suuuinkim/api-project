@@ -22,4 +22,7 @@ public class Doctor {
     @JsonIgnore
     @OneToMany(mappedBy = "doctor")
     private List<TreatmentRecord> treatmentRecords = new ArrayList<>();
+
+    @OneToOne
+    private User user;
 }

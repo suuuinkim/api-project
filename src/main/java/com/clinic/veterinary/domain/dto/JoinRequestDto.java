@@ -9,10 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class UserDto {
+public class JoinRequestDto {
 
     private String loginId;
 
@@ -24,17 +21,4 @@ public class UserDto {
 
     private Role role;
 
-    private Doctor doctor;
-
-    public User toEntity(){
-        User user = User.builder()
-                .loginId(loginId)
-                .username(username)
-                .password(password)
-                .email(email)
-                .role(role.USER)
-                .build();
-
-        return user;
-    }
 }

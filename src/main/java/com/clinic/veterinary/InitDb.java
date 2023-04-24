@@ -1,6 +1,7 @@
 package com.clinic.veterinary;
 
 import com.clinic.veterinary.domain.*;
+import com.clinic.veterinary.domain.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,9 @@ public class InitDb {
 
             Doctor doctor2 = createDoctor("하박사");
             em.persist(doctor2);
+
+            User user1 = createUser("user01", "김박사", "$2a$10$wjG4OvJue6B1Hr2aJF7uhuVtmlH6jvegvpRURkGYGAyxI1PXK8sWa", "test@gmail.com", Role.USER, doctor1);
+            em.persist(user1);
 
             // 동물 타입 데이터
             AnimalType animalType1 = createAnimalType("강아지");
@@ -79,6 +83,11 @@ public class InitDb {
             return doctor;
         }
 
+        private static User createUser(String loginId, String username, String password, String email, Role role, Doctor doctor){
+            User user = new User(loginId, username, password, email, role, doctor);
+
+            return user;
+        }
 
         private static AnimalType createAnimalType(String name) {
             AnimalType animalType = new AnimalType();
