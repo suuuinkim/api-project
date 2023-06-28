@@ -10,7 +10,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class CustomUserDetail implements UserDetails {
 
-    private final User user;
+    private final Member user;
 
     @Override
     public String getPassword(){

@@ -1,7 +1,7 @@
 package com.clinic.veterinary.domain.dto;
 
+import com.clinic.veterinary.domain.Member;
 import com.clinic.veterinary.domain.Role;
-import com.clinic.veterinary.domain.User;
 import lombok.Getter;
 
 /**
@@ -15,11 +15,11 @@ public class UserSessionDto {
     private String email;
     private Role role;
 
-    public UserSessionDto(User user){
-        this.loginId = user.getLoginId();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.role = user.getRole();
+    public UserSessionDto(Member member){
+        this.loginId = member.getLoginId();
+        this.username = member.getUsername();
+        this.password = member.getPassword();
+        this.email = member.getEmail();
+        this.role = member.getRole();
     }
 }

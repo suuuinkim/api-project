@@ -1,7 +1,7 @@
 package com.clinic.veterinary.api.controller;
 
 import com.clinic.veterinary.api.Response;
-import com.clinic.veterinary.domain.User;
+import com.clinic.veterinary.domain.Member;
 import com.clinic.veterinary.domain.dto.LoginDto;
 import com.clinic.veterinary.domain.dto.UserDto;
 import com.clinic.veterinary.repository.UserRepository;
@@ -23,7 +23,7 @@ public class UserApiController {
     @PostMapping("/api/v1/join")
     public Response join(@RequestBody @Valid UserDto userDto){
 
-        User user = userService.join(userDto);
+        Member member = userService.join(userDto);
         return new Response(true, "회원가입이 완료되었습니다.");
     }
 

@@ -24,5 +24,5 @@ public class Doctor {
     private List<TreatmentRecord> treatmentRecords = new ArrayList<>();
 
     @OneToOne
-    private User user;
+    private Member member;
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Member {
 
     @Id
     @GeneratedValue
@@ -35,7 +35,7 @@ public class User {
     @OneToOne
     private Doctor doctor;
 
-    public User(String loginId, String username, String password, String email, Role role, Doctor doctor) {
+    public Member(String loginId, String username, String password, String email, Role role, Doctor doctor) {
         this.loginId = loginId;
         this.username = username;
         this.password = password;

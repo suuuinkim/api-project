@@ -1,7 +1,7 @@
 package com.clinic.veterinary.service;
 
 import com.clinic.veterinary.domain.CustomUserDetail;
-import com.clinic.veterinary.domain.User;
+import com.clinic.veterinary.domain.Member;
 import com.clinic.veterinary.domain.dto.UserSessionDto;
 import com.clinic.veterinary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +25,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByLoginId(username).orElseThrow(() ->
+        Member member = userRepository.findByLoginId(username).orElseThrow(() ->
                 new UsernameNotFoundException("해당 사용자가 존재하지 않습니다 : " + username));
 
-        session.setAttribute("user", new UserSessionDto(user));
+        session.setAttribute("user", new UserSessionDto(member));
 
-        return new CustomUserDetail(user); // 시큐리티 세션에 유저 정보 저장
+        return new CustomUserDetail(member); // 시큐리티 세션에 유저 정보 저장
     }
 }

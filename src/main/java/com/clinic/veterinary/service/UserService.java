@@ -1,8 +1,7 @@
 package com.clinic.veterinary.service;
 
-import com.clinic.veterinary.domain.Doctor;
+import com.clinic.veterinary.domain.Member;
 import com.clinic.veterinary.domain.Role;
-import com.clinic.veterinary.domain.User;
 import com.clinic.veterinary.domain.dto.LoginDto;
 import com.clinic.veterinary.domain.dto.UserDto;
 import com.clinic.veterinary.repository.UserRepository;
@@ -20,9 +19,9 @@ public class UserService {
     private final BCryptPasswordEncoder encoder;
 
     @Transactional
-    public User join(UserDto userDto){
+    public Member join(UserDto userDto){
 
-        User user = new User(userDto.getLoginId(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), Role.USER, userDto.getDoctor());
+        Member user = new Member(userDto.getLoginId(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), Role.USER, userDto.getDoctor());
         return userRepository.save(user);
 
     }
@@ -34,7 +33,7 @@ public class UserService {
 
         System.out.println("password = " + password);
 
-        Optional<User> byLoginId = userRepository.findByLoginId(loginId);
+        Optional<Member> byLoginId = userRepository.findByLoginId(loginId);
 
         if(encoder.matches(password, byLoginId.get().getPassword())){
             return "로그인 성공";

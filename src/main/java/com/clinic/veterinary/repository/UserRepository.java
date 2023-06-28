@@ -1,10 +1,10 @@
 package com.clinic.veterinary.repository;
 
-import com.clinic.veterinary.domain.User;
+import com.clinic.veterinary.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByLoginId(String longinId);
+public interface UserRepository extends JpaRepository<Member, Long> {
+    Optional<Member> findByLoginId(String longinId);
 }
