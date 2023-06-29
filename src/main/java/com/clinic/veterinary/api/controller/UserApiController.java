@@ -7,9 +7,9 @@ import com.clinic.veterinary.domain.dto.UserDto;
 import com.clinic.veterinary.repository.UserRepository;
 import com.clinic.veterinary.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,10 +27,27 @@ public class UserApiController {
         return new Response(true, "회원가입이 완료되었습니다.");
     }
 
-
-    @PostMapping("/api/v1/login")
-    public Response login(@RequestBody @Valid LoginDto loginDto){
+    @RequestMapping(value = "/api/v1/login", method = RequestMethod.POST)
+    public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto){
         String login = userService.login(loginDto);
-        return new Response(true, login);
+
+        if("success".equals(login)){
+            System.out.println("성공 login = " + login);
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", "/index")
+                    .build();
+        }else {
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", "/login")
+                    .build();
+        }
+//        return new Response(true, login);
     }
+
+
+
+
+
+
+    
 }

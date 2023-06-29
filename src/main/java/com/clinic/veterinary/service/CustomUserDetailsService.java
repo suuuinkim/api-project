@@ -23,10 +23,10 @@ public class CustomUserDetailsService implements UserDetailsService {
      * db에서 loginId 확인
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Member member = userRepository.findByLoginId(username).orElseThrow(() ->
-                new UsernameNotFoundException("해당 사용자가 존재하지 않습니다 : " + username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("email = " + email);
+        Member member = userRepository.findByEmail(email).orElseThrow(() ->
+                new UsernameNotFoundException("해당 사용자가 존재하지 않습니다 : " + email));
 
         session.setAttribute("user", new UserSessionDto(member));
 

@@ -28,12 +28,13 @@ public class UserService {
 
     @Transactional
     public String login(LoginDto loginDto){
-        String loginId = loginDto.getLoginId();
+//        String loginId = loginDto.getLoginId();
+        String email = loginDto.getEmail();
         String password = loginDto.getPassword();
 
         System.out.println("password = " + password);
 
-        Optional<Member> byLoginId = userRepository.findByLoginId(loginId);
+        Optional<Member> byLoginId = userRepository.findByEmail(email);
 
         if(encoder.matches(password, byLoginId.get().getPassword())){
             return "로그인 성공";
