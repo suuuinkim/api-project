@@ -37,17 +37,11 @@ public class UserApiController {
                     .header("Location", "/index")
                     .build();
         }else {
+            System.out.println("실패");
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", "/login")
                     .build();
         }
 //        return new Response(true, login);
     }
-
-
-
-
-
-
-    
 }

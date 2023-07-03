@@ -37,9 +37,9 @@ public class UserService {
         Optional<Member> byLoginId = userRepository.findByEmail(email);
 
         if(encoder.matches(password, byLoginId.get().getPassword())){
-            return "로그인 성공";
+            return "success";
         }
 
-        return "로그인 실패";
+        return "fail";
     }
 }
