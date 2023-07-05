@@ -6,15 +6,23 @@ import com.clinic.veterinary.domain.dto.LoginDto;
 import com.clinic.veterinary.domain.dto.UserDto;
 import com.clinic.veterinary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
@@ -28,18 +36,27 @@ public class UserService {
 
     @Transactional
     public String login(LoginDto loginDto){
-//        String loginId = loginDto.getLoginId();
+
         String email = loginDto.getEmail();
         String password = loginDto.getPassword();
-
-        System.out.println("password = " + password);
 
         Optional<Member> byLoginId = userRepository.findByEmail(email);
 
         if(encoder.matches(password, byLoginId.get().getPassword())){
             return "success";
         }
-
         return "fail";
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Member> optionalMember = userRepository.findByEmail(email);
+        Member member = optionalMember.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(member.getRole().name()));
+
+        return new User(member.getEmail(), member.getPassword(), authorities);
     }
 }

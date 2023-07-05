@@ -62,7 +62,9 @@
 <!--                                            Login-->
 <!--                                        </a>-->
 
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" onclick="login();">Login</button>
+<!--                                        <button type="submit" class="btn btn-primary btn-user btn-block" onclick="login();">Login</button>-->
+<!--                                        <button class="">Login</button>-->
+                                        <div onclick="login();">login</div>
 
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -120,12 +122,13 @@
         };
 
         $.ajax({
-            url : '/api/v1/login',
+            url : '/login',
             type : 'POST',
             contentType : 'application/json',
             data : JSON.stringify(loginData),
             success : function(response){
                 console.log('성공');
+                window.location.href = '/main';
             },
             error : function(xhr, status, error){
                 console.log('실패');
