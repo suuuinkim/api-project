@@ -24,7 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder;
+//    private final BCryptPasswordEncoder encoder;
 
     @Transactional
     public Member join(UserDto userDto){
@@ -37,26 +37,31 @@ public class UserService implements UserDetailsService {
     @Transactional
     public String login(LoginDto loginDto){
 
-        String email = loginDto.getEmail();
+
+//        String email = loginDto.getEmail();
+        String loginId = loginDto.getLoginId();
         String password = loginDto.getPassword();
 
-        Optional<Member> byLoginId = userRepository.findByEmail(email);
+        System.out.println("loginId = " + loginId);
+        System.out.println("password = " + password);
 
-        if(encoder.matches(password, byLoginId.get().getPassword())){
-            return "success";
-        }
-        return "fail";
+        Optional<Member> byLoginId = userRepository.findByLoginId(loginId);
+
+        return "success";
+//        if(encoder.matches(password, byLoginId.get().getPassword())){
+//            return "success";
+//        }
+//        return "fail";
     }
 
-
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Member> optionalMember = userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+        Optional<Member> optionalMember = userRepository.findByLoginId(loginId);
         Member member = optionalMember.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().name()));
 
-        return new User(member.getEmail(), member.getPassword(), authorities);
+        return new User(member.getLoginId(), member.getPassword(), authorities);
     }
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/default_layout">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <div class="container">
+            <div class="">
+                <div>
+                    <div>
+                        <div><h3>Login</h3></div>
+                        <div>
+                            <form id="form" action="/login" method="post">
+                                <div th:if="${param.error}">
+                                    <p th:text="${exception}" class=""></p>
+                                </div>
+
+                                <div>
+                                    <input class="" id="loginId" name="loginId" type="email" placeholder="test@gmail.com" required/>
+                                </div>
+
+                                <div>
+                                    <input class="" id="password" name="password" type="password" placeholder="password" required/>
+                                </div>
+
+                                <div>
+                                    <input class="" id="remember" type="checkbox" required/>
+                                    <label class="" for="remember">Remember Password</label>
+                                </div>
+
+                                <div>
+                                    <a class="" href="javascript:fnSubmit()">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</body>
+<script th:inline="javascript">
+    let form = $('#form');
+    console.log("form");
+    console.log(form);
+    function fnSubmit(){
+        console.log(">>콘솔 지금 여기 찍히나?");
+        form.submit();
+    }
+
+    $(function(){
+        $("#password").on("keyup", function(e) {
+            if(e.key=="Enter") fnSubmit();
+        });
+        // form.validate({
+        //     //submitHandler : function(form){
+        //     submitHandler: function(form) {
+        //         $(form).submit();
+        //     }
+        // })
+    })
+</script>
+</html>
